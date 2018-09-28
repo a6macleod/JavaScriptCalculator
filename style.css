@@ -1,3 +1,4 @@
+
 * {
 	font-family: Arial, Helvetica, sans-serif;
 	color: black;
@@ -5,7 +6,85 @@
 	margin: 0;
 	padding: 0;
 }
+body {
+	height: 35rem;
+}
+h1{
+	text-align: center;
+	background-color: grey;
+	margin-top: 0.5rem;
+}
 
-div {
+.outLine {
+	border: solid black 4px;
+	background-color: grey;
+	position: relative;
+	width: 25rem;
+	height: 30rem;
+	margin: 0 auto;
+	top: 2rem;
+}
+.displayScreen {
+	height: 4rem;
+	width: 90%;
+	margin: 1.5rem auto;
+	background-color: yellow;
 	border: solid black 2px;
 }
+.keyPad {
+	height: 21rem;
+	width: 90%;
+	margin: 1.5rem auto;
+	background-color: blue;
+	border: solid black 2px;
+}
+.topButtons {
+	height: 3rem;
+	width: 67%;
+	margin: 0.5rem 8rem 0.5rem 0.5rem;
+	background-color: green;
+	border: solid black 2px;
+
+}
+.numberButtons {
+	height: 16rem;
+	width: 67%;
+	margin: 0.5rem 8rem 0.5rem 0.5rem;
+	background-color: orange;
+	border: solid black 2px;
+}
+.operatorButtons {
+	height: 19.7rem;
+	width: 25%;
+	margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+	background-color: purple;
+	border: solid black 2px;
+	position: absolute;
+	right: 1rem;
+	top: 7.4rem;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
