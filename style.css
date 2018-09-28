@@ -8,62 +8,65 @@
 }
 body {
 	height: 35rem;
+	background-color: #b3d9ff;
 }
 h1{
 	text-align: center;
-	background-color: grey;
 	margin-top: 0.5rem;
+	color: white;
+}
+p {
+	margin-top: 0.35rem;
+}
+a{
+	color: #0000cc;
+	text-decoration: underline;
 }
 
 .outLine {
 	border: solid black 4px;
 	background-color: grey;
 	position: relative;
-	width: 25rem;
+	width: 19rem;
 	height: 30rem;
 	margin: 0 auto;
 	top: 2rem;
+	border-radius: 1em;
 }
 .displayScreen {
 	height: 4rem;
 	width: 90%;
 	margin: 1.5rem auto;
-	background-color: yellow;
+	background-color: #cccccc;
 	border: solid black 2px;
 }
 .keyPad {
 	height: 21rem;
 	width: 90%;
 	margin: 1.5rem auto;
-	background-color: blue;
+	background-color: #333333;
 	border: solid black 2px;
 }
-.topButtons {
-	height: 3rem;
-	width: 67%;
-	margin: 0.5rem 8rem 0.5rem 0.5rem;
-	background-color: green;
-	border: solid black 2px;
+.keyPadTable {
+	height: 19.5rem;
+	width: 100%;
+	margin: 0.2rem auto;
+	position: relative;
+	left: 0rem;
 
 }
-.numberButtons {
-	height: 16rem;
-	width: 67%;
-	margin: 0.5rem 8rem 0.5rem 0.5rem;
-	background-color: orange;
-	border: solid black 2px;
+.button {
+	width: 4rem;
+	height: 4rem;
+	border-radius: 100%;
+	font-size: 2rem;
+	font-weight: bold;
+	background-color: #e6e6e6;
 }
-.operatorButtons {
-	height: 19.7rem;
-	width: 25%;
-	margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-	background-color: purple;
-	border: solid black 2px;
-	position: absolute;
-	right: 1rem;
-	top: 7.4rem;
+#zero {
+	width: 4rem;
+}
 
-}
 
 
 
