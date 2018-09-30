@@ -46,6 +46,7 @@ a{
 	margin: 1.5rem auto;
 	background-color: #333333;
 	border: solid black 2px;
+	border-radius: 0.5em;
 }
 .keyPadTable {
 	height: 19.5rem;
@@ -53,7 +54,6 @@ a{
 	margin: 0.2rem auto;
 	position: relative;
 	left: 0rem;
-
 }
 .button {
 	width: 4rem;
@@ -63,8 +63,9 @@ a{
 	font-weight: bold;
 	background-color: #e6e6e6;
 }
-#zero {
-	width: 4rem;
+.operatorButton {
+	background-color: #ff5c33;
+	color: white;
 }
 
 
