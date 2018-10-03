@@ -40,6 +40,17 @@ a{
 	background-color: #cccccc;
 	border: solid black 2px;
 }
+.equationDisplay {
+	height: 4rem;
+	width: 40%;
+}
+.answerDisplay {
+	height: 4rem;
+	width: 60%;
+	position: relative;
+	left: 6.85rem;
+	bottom: 4rem;
+}
 .keyPad {
 	height: 21rem;
 	width: 90%;
@@ -67,6 +78,7 @@ a{
 	background-color: #ff5c33;
 	color: white;
 }
+
 
 
 

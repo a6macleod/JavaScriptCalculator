@@ -1,18 +1,7 @@
 // JavaScript Calculator Sep 2018
-let firstNumber = 0;
-let secondNumber = 0;
 let answer;
 let tempNum = "";
-
-//function operate () {
-//	console.log(equation);
-//}
- 
-//let display = firstNumber;
-//display.document.querySelector('.displayScreen').textContent = firstNumber;
-
-
-
+let newOperator;
 
 // CLICK NUMBERS
 const numButtons = document.querySelectorAll('.number');
@@ -22,32 +11,81 @@ numButtons.forEach(function(currentBut) {
 		if (tempNum.length < 8) {
 			tempNum += text;
 			updateDisplay();
-
 		}
-		console.log(tempNum);
 	});
 });
-
 // CLICK OPERATORS
 const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
+		newOperator = currentOper.value;
 		let text = currentOper.value;
+		let check = tempNum.slice(-1);
+		if (check === '%' || check === '/' || check === '*' || check === '-' || check === '+') {
+			changeOperator(); // CREATE CHANGE OPERATOR FUNCTION
+		} else 
+//		if (check === '.') {
+//			decimalCheck();
+//		} else
 		if (tempNum.length < 8) {
 			tempNum += text;
 			updateDisplay();
 		}
-		console.log(tempNum);
 	});
 });
 
+// "AC" clear button 
+let clear = document.querySelector("#clear");
+clear.addEventListener('click', function() {
+	tempNum = "";
+	updateDisplay();
+});
+// "del" DELETE BUTTON
+let del = document.querySelector('#delete');
+del.addEventListener('click', function() {
+	let update = tempNum;
+	update = update.slice(0, -1);
+	tempNum = update;
+	updateDisplay();
+});
+// "=" EQUALS BUTTON
+let equal = document.querySelector('#equals');
+equal.addEventListener('click', function() {
+//	let update = tempNum;
+//	update = update.slice(0, -1);
+//	tempNum = update;
+	updateDisplay();
+});
+
 function updateDisplay () {
-document.querySelector('.displayScreen').textContent = tempNum;
+document.querySelector('.equationDisplay').textContent = tempNum;
 }
+function updateAnswer () {
+document.querySelector('.answerDisplay').textContent = answer;
+}
+function changeOperator () {
+	console.log("delete the last operator!")
+	console.log(newOperator);
+	let update = tempNum;
+	update = update.slice(0, -1);
+	update += newOperator;
+	tempNum = update;
+	updateDisplay();
+}
+// "." decimal point check
+// function decimalCheck () {
+//	let check = tempNum;
+//	decimal = '.';
+//	if (string.includes(decimal)) {
+//		prompt("Sorry! you can't enter two decimal points")
+//		return;
+//	}
+//};
 
 // Operate at "="
-function operate () {
-	
+function operate (tempNum) {
+	return new Function('return ' + tempNum) ();
+	updateAnswer();
 }
 
 
