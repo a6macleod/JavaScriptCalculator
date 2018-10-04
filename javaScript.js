@@ -103,11 +103,11 @@ saveAnswer();
 //}
 
 
-// 1) pressing the equals sign will complete the function
-// 2) the answer appears on the right side of the calculator and equation on left
+// 1) Create separate functions for the operators
+// 2) create an Array that can take numbers and operators
+// 3) keyboard is tied to the calculator
 // 3) typing into the calculator after the equals sign puts the answer as the first number of new equation
-// 3) snarky comment for trying to divide over zero
-// 4) 
+// 4) snarky comment for trying to divide over zero
 
 
 
