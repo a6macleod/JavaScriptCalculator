@@ -50,6 +50,8 @@ a{
 	position: relative;
 	left: 6.85rem;
 	bottom: 4rem;
+	text-align: right;
+	font-size: 2em;
 }
 .keyPad {
 	height: 21rem;
@@ -74,7 +76,7 @@ a{
 	font-weight: bold;
 	background-color: #e6e6e6;
 }
-.operatorButton {
+.operatorButton, .equalsButton, .delete {
 	background-color: #ff5c33;
 	color: white;
 }

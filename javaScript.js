@@ -8,11 +8,13 @@ const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(function(currentBut) {
 	currentBut.addEventListener('click', function () {
 		let text = currentBut.value;
-		if (tempNum.length < 8) {
+			if (text === '.') {
+				console.log('decimal');
+//				decimalCheck();
+		} else
 			tempNum += text;
 			updateDisplay();
-		}
-	});
+		});
 });
 // CLICK OPERATORS
 const operButtons = document.querySelectorAll('.operatorButton');
@@ -23,11 +25,7 @@ operButtons.forEach(function(currentOper) {
 		let check = tempNum.slice(-1);
 		if (check === '%' || check === '/' || check === '*' || check === '-' || check === '+') {
 			changeOperator(); // CREATE CHANGE OPERATOR FUNCTION
-		} else 
-//		if (check === '.') {
-//			decimalCheck();
-//		} else
-		if (tempNum.length < 8) {
+		} else if (tempNum.length < 8) {
 			tempNum += text;
 			updateDisplay();
 		}
@@ -38,24 +36,31 @@ operButtons.forEach(function(currentOper) {
 let clear = document.querySelector("#clear");
 clear.addEventListener('click', function() {
 	tempNum = "";
+	answer = "";
+	updateAnswer();
 	updateDisplay();
 });
 // "del" DELETE BUTTON
 let del = document.querySelector('#delete');
 del.addEventListener('click', function() {
+	console.log(tempNum)
 	let update = tempNum;
-	update = update.slice(0, -1);
-	tempNum = update;
+	tempNum = update.slice(0, -1);
 	updateDisplay();
 });
 // "=" EQUALS BUTTON
 let equal = document.querySelector('#equals');
 equal.addEventListener('click', function() {
-//	let update = tempNum;
-//	update = update.slice(0, -1);
-//	tempNum = update;
-	updateDisplay();
+	operate();
 });
+// Percent
+//let percent = document.querySelector('#percent');
+//del.addEventListener('click', function() {
+//	let perc = tempNum;
+//	perc = (perc/1000);
+//	tempNum = perc;
+//	updateDisplay();
+//});
 
 function updateDisplay () {
 document.querySelector('.equationDisplay').textContent = tempNum;
@@ -72,30 +77,37 @@ function changeOperator () {
 	tempNum = update;
 	updateDisplay();
 }
-// "." decimal point check
-// function decimalCheck () {
-//	let check = tempNum;
-//	decimal = '.';
-//	if (string.includes(decimal)) {
-//		prompt("Sorry! you can't enter two decimal points")
-//		return;
-//	}
-//};
+ //"." decimal point check
+function decimalCheck () {
+	if (tempNum.length === 0) {
+		tempNum += '0.';
+		updateDisplay();
+	} else if (tempNum.indexOf('.') < 0){
+		tempNum += '.';
+		updateDisplay()
+		console.log("decimal")
+	}
+};
 
 // Operate at "="
-function operate (tempNum) {
-	return new Function('return ' + tempNum) ();
-	updateAnswer();
+function operate () {
+let calc = tempNum;
+answer = eval(calc);
+updateAnswer();
+saveAnswer();
 }
+//function saveAnswer() {
+//	let saveAnswer = answer;
+//	tempNum = saveAnswer;
+//	console.log(tempNum);
+//}
 
 
-
-// 1) first number is set is st up as a string and each number and decimal button appends to it
-// 2) pressing an operator button will convert firstNumber to a number and append that operator to the equation
-// 3) pressing a different operator button will change the operator 
-// 3) pressing the equals sign will complete the function
-// 4) So overall, typing adds numbers to a function and the operators 
-
+// 1) pressing the equals sign will complete the function
+// 2) the answer appears on the right side of the calculator and equation on left
+// 3) typing into the calculator after the equals sign puts the answer as the first number of new equation
+// 3) snarky comment for trying to divide over zero
+// 4) 
 
 
 
