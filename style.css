@@ -43,6 +43,7 @@ a{
 .equationDisplay {
 	height: 4rem;
 	width: 40%;
+	font-size: 2em;
 }
 .answerDisplay {
 	height: 4rem;
@@ -79,6 +80,10 @@ a{
 .operatorButton, .equalsButton, .delete {
 	background-color: #ff5c33;
 	color: white;
+}
+.equalsButton {
+	width: 8rem;
+	border-radius: 40%;
 }
 
 

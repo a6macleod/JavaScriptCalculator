@@ -2,28 +2,32 @@
 let answer;
 let tempNum = "";
 let newOperator;
+let calculation = [];
 
 // CLICK NUMBERS
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(function(currentBut) {
 	currentBut.addEventListener('click', function () {
+		operatorPush(); // This will push the last operator to the array if available
 		let text = currentBut.value;
 			if (text === '.') {
-				console.log('decimal');
-//				decimalCheck();
+//				console.log('decimal');
+				decimalCheck();
 		} else
 			tempNum += text;
 			updateDisplay();
+//			console.log(calculation);
 		});
 });
 // CLICK OPERATORS
 const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
+		numberPush(); // This will push the previous numbers to the array
 		newOperator = currentOper.value;
 		let text = currentOper.value;
 		let check = tempNum.slice(-1);
-		if (check === '%' || check === '/' || check === '*' || check === '-' || check === '+') {
+		if (operatorCheck(check) === true) {
 			changeOperator(); // CREATE CHANGE OPERATOR FUNCTION
 		} else if (tempNum.length < 8) {
 			tempNum += text;
@@ -43,7 +47,6 @@ clear.addEventListener('click', function() {
 // "del" DELETE BUTTON
 let del = document.querySelector('#delete');
 del.addEventListener('click', function() {
-	console.log(tempNum)
 	let update = tempNum;
 	tempNum = update.slice(0, -1);
 	updateDisplay();
@@ -61,7 +64,38 @@ equal.addEventListener('click', function() {
 //	tempNum = perc;
 //	updateDisplay();
 //});
+function operatorCheck () {
+	let check = tempNum;
+		if (check === '/' || check === '*' || check === '-' || check === '+'){
+			return true; 
+		}
+}
 
+function numberPush () {
+	if (tempNum >= 0) {
+		let numPush = tempNum;
+		if (operatorCheck(numPush) === true) {
+			return
+		} else {
+			calculation.push(Number(tempNum));
+			tempNum = '';
+//			console.log(calculation);
+		}
+	}
+}
+function operatorPush () {
+	if (tempNum >= 0) {
+//		console.log(tempNum);
+		let opPush = tempNum;
+		if (operatorCheck(opPush) === true) {
+			calculation.push(opPush);
+//			console.log(calculation);
+		} else {
+			console.log(calculation);
+			return;
+		}
+	}
+}
 function updateDisplay () {
 document.querySelector('.equationDisplay').textContent = tempNum;
 }
