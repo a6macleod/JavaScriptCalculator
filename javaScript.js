@@ -8,26 +8,27 @@ let calculation = [];
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(function(currentBut) {
 	currentBut.addEventListener('click', function () {
+		console.log(calculation);
 		operatorPush(); // This will push the last operator to the array if available
 		let text = currentBut.value;
 			if (text === '.') {
-//				console.log('decimal');
 				decimalCheck();
 		} else
 			tempNum += text;
 			updateDisplay();
-//			console.log(calculation);
 		});
 });
 // CLICK OPERATORS
 const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
+		console.log(calculation);
 		numberPush(); // This will push the previous numbers to the array
 		newOperator = currentOper.value;
 		let text = currentOper.value;
-		let check = tempNum.slice(-1);
+		let check = tempNum;
 		if (operatorCheck(check) === true) {
+//			numberPush();
 			changeOperator(); // CREATE CHANGE OPERATOR FUNCTION
 		} else if (tempNum.length < 8) {
 			tempNum += text;
@@ -56,42 +57,41 @@ let equal = document.querySelector('#equals');
 equal.addEventListener('click', function() {
 	operate();
 });
-// Percent
-//let percent = document.querySelector('#percent');
-//del.addEventListener('click', function() {
-//	let perc = tempNum;
-//	perc = (perc/1000);
-//	tempNum = perc;
-//	updateDisplay();
-//});
+
 function operatorCheck () {
-	let check = tempNum;
-		if (check === '/' || check === '*' || check === '-' || check === '+'){
+	let tNum = tempNum;
+		if (tNum === '/' || tNum === '*' || tNum === '-' || tNum === '+'){
+//			console.log('operatorCheck = true');
 			return true; 
+		} else {
+//			console.log('operatorCheck = false');
+			return false;
 		}
 }
 
 function numberPush () {
-	if (tempNum >= 0) {
-		let numPush = tempNum;
-		if (operatorCheck(numPush) === true) {
-			return
-		} else {
+//	if (tempNum >= 0) {
+//		let numPush = tempNum;
+//		if (operatorCheck(numPush) === false) {
+//			console.log('operatorCheck = false');
+//			return
+//		} else {
 			calculation.push(Number(tempNum));
 			tempNum = '';
-//			console.log(calculation);
-		}
-	}
+			console.log(calculation);
+//		}
+//	}
 }
 function operatorPush () {
 	if (tempNum >= 0) {
-//		console.log(tempNum);
+		console.log('operatorPush ' + tempNum);
 		let opPush = tempNum;
+		console.log(operatorCheck());
 		if (operatorCheck(opPush) === true) {
+			console.log("opPush" + opPush)
 			calculation.push(opPush);
-//			console.log(calculation);
-		} else {
 			console.log(calculation);
+		} else {
 			return;
 		}
 	}
