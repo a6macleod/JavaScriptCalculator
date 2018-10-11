@@ -8,10 +8,12 @@ let calculation = [];
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(function(currentBut) {
 	currentBut.addEventListener('click', function () {
-		console.log(calculation);
-		operatorPush(); // This will push the last operator to the array if available
+		console.log(calculation);	
 		let text = currentBut.value;
-			if (text === '.') {
+		if (operatorCheck(tempNum) == true) {
+			operatorPush(); // This will push the last operator to the array if available
+		}
+		if (text === '.') {
 				decimalCheck();
 		} else
 			tempNum += text;
@@ -23,12 +25,12 @@ const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
 		console.log(calculation);
-		numberPush(); // This will push the previous numbers to the array
+//		numberPush(); // This will push the previous numbers to the array
 		newOperator = currentOper.value;
 		let text = currentOper.value;
-		let check = tempNum;
-		if (operatorCheck(check) === true) {
-//			numberPush();
+//		let check = tempNum;
+		if (operatorCheck(tempNum) == false) {
+			numberPush();
 			changeOperator(); // CREATE CHANGE OPERATOR FUNCTION
 		} else if (tempNum.length < 8) {
 			tempNum += text;
@@ -59,8 +61,9 @@ equal.addEventListener('click', function() {
 });
 
 function operatorCheck () {
-	let tNum = tempNum;
-		if (tNum === '/' || tNum === '*' || tNum === '-' || tNum === '+'){
+	let tNum = tempNum.slice(-1);
+//	console.log("operatorCheck " + tNum);
+		if (tNum == '/' || tNum == '*' || tNum == '-' || tNum == '+'){
 //			console.log('operatorCheck = true');
 			return true; 
 		} else {
@@ -70,31 +73,19 @@ function operatorCheck () {
 }
 
 function numberPush () {
-//	if (tempNum >= 0) {
-//		let numPush = tempNum;
-//		if (operatorCheck(numPush) === false) {
-//			console.log('operatorCheck = false');
-//			return
-//		} else {
+	if (tempNum >= 0) {
 			calculation.push(Number(tempNum));
 			tempNum = '';
 			console.log(calculation);
-//		}
-//	}
-}
-function operatorPush () {
-	if (tempNum >= 0) {
-		console.log('operatorPush ' + tempNum);
-		let opPush = tempNum;
-		console.log(operatorCheck());
-		if (operatorCheck(opPush) === true) {
-			console.log("opPush" + opPush)
-			calculation.push(opPush);
-			console.log(calculation);
-		} else {
-			return;
 		}
 	}
+
+function operatorPush () {
+		let sign = tempNum;
+		console.log("the sign is " + sign);
+			calculation.push(sign);
+			tempNum = '';
+			console.log(calculation);
 }
 function updateDisplay () {
 document.querySelector('.equationDisplay').textContent = tempNum;
@@ -103,8 +94,8 @@ function updateAnswer () {
 document.querySelector('.answerDisplay').textContent = answer;
 }
 function changeOperator () {
-	console.log("delete the last operator!")
-	console.log(newOperator);
+//	console.log("delete the last operator!")
+//	console.log(newOperator);
 	let update = tempNum;
 	update = update.slice(0, -1);
 	update += newOperator;
@@ -140,7 +131,7 @@ saveAnswer();
 // 1) Create separate functions for the operators
 // 2) create an Array that can take numbers and operators
 // 3) keyboard is tied to the calculator
-// 3) typing into the calculator after the equals sign puts the answer as the first number of new equation
+// 3) after the equals sign  the answer is the first number of new equation
 // 4) snarky comment for trying to divide over zero
 
 
