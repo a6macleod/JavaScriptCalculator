@@ -25,16 +25,15 @@ const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
 		console.log(calculation);
-//		numberPush(); // This will push the previous numbers to the array
 		newOperator = currentOper.value;
 		let text = currentOper.value;
-//		let check = tempNum;
 		if (operatorCheck(tempNum) == false) {
-			numberPush();
-			changeOperator(); // CREATE CHANGE OPERATOR FUNCTION
-		} else if (tempNum.length < 8) {
+			numberPush(); // This will push the previous numbers to the array
 			tempNum += text;
 			updateDisplay();
+		} else {
+			changeOperator(); // CHANGE OPERATOR IF 
+			
 		}
 	});
 });
@@ -42,6 +41,7 @@ operButtons.forEach(function(currentOper) {
 // "AC" clear button 
 let clear = document.querySelector("#clear");
 clear.addEventListener('click', function() {
+	calculation = [];
 	tempNum = "";
 	answer = "";
 	updateAnswer();
@@ -62,40 +62,35 @@ equal.addEventListener('click', function() {
 
 function operatorCheck () {
 	let tNum = tempNum.slice(-1);
-//	console.log("operatorCheck " + tNum);
 		if (tNum == '/' || tNum == '*' || tNum == '-' || tNum == '+'){
-//			console.log('operatorCheck = true');
 			return true; 
 		} else {
-//			console.log('operatorCheck = false');
 			return false;
 		}
 }
 
 function numberPush () {
-	if (tempNum >= 0) {
-			calculation.push(Number(tempNum));
-			tempNum = '';
-			console.log(calculation);
-		}
-	}
+	calculation.push(Number(tempNum));
+	tempNum = '';
+	console.log(calculation);
+}
 
 function operatorPush () {
-		let sign = tempNum;
-		console.log("the sign is " + sign);
-			calculation.push(sign);
-			tempNum = '';
-			console.log(calculation);
+	let sign = tempNum;
+		calculation.push(sign);
+		tempNum = '';
 }
 function updateDisplay () {
-document.querySelector('.equationDisplay').textContent = tempNum;
+	document.querySelector('.equationDisplay').textContent = tempNum;
 }
 function updateAnswer () {
-document.querySelector('.answerDisplay').textContent = answer;
+	document.querySelector('.answerDisplay').textContent = answer;
+	updateDisplay();
+	tempNum = answer;
+	answer = '';
+	calculation = [];
 }
 function changeOperator () {
-//	console.log("delete the last operator!")
-//	console.log(newOperator);
 	let update = tempNum;
 	update = update.slice(0, -1);
 	update += newOperator;
@@ -116,11 +111,17 @@ function decimalCheck () {
 
 // Operate at "="
 function operate () {
-let calc = tempNum;
-answer = eval(calc);
-updateAnswer();
-saveAnswer();
+	if (operatorCheck(tempNum) == false) {
+		numberPush();
+		let calc = calculation.join();
+		let string = calc.replace(/,/g, '');
+		console.log(string);
+		answer = eval(string);
+		updateAnswer();
+//		saveAnswer();
+	}
 }
+
 //function saveAnswer() {
 //	let saveAnswer = answer;
 //	tempNum = saveAnswer;
@@ -128,6 +129,12 @@ saveAnswer();
 //}
 
 
+// ISSUES
+// 1) save answer functionality
+// 2) positive/negative
+// 3) 
+
+// GOALS
 // 1) Create separate functions for the operators
 // 2) create an Array that can take numbers and operators
 // 3) keyboard is tied to the calculator
