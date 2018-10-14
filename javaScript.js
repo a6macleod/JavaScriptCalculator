@@ -25,6 +25,7 @@ const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
 		console.log(calculation);
+		clearAnswer();
 		newOperator = currentOper.value;
 		let text = currentOper.value;
 		if (operatorCheck(tempNum) == false) {
@@ -59,6 +60,15 @@ let equal = document.querySelector('#equals');
 equal.addEventListener('click', function() {
 	operate();
 });
+// "+/-" CHANGE POSITIVE/NEGATIVE BUTTON
+//let equal = document.querySelector('#positivity');
+//equal.addEventListener('click', function() {
+//	let negCheck = tempNum.slice(0);
+//	if (negCheck == "-") {
+//		return;
+//	} else 
+//	updateDisplay();
+//});
 
 function operatorCheck () {
 	let tNum = tempNum.slice(-1);
@@ -86,7 +96,7 @@ function updateDisplay () {
 function updateAnswer () {
 	document.querySelector('.answerDisplay').textContent = answer;
 	updateDisplay();
-	tempNum = answer;
+	saveAnswer();
 	answer = '';
 	calculation = [];
 }
@@ -118,28 +128,32 @@ function operate () {
 		console.log(string);
 		answer = eval(string);
 		updateAnswer();
-//		saveAnswer();
 	}
 }
 
-//function saveAnswer() {
-//	let saveAnswer = answer;
-//	tempNum = saveAnswer;
-//	console.log(tempNum);
-//}
+function saveAnswer() {
+	let saveAnswer = answer.toString();
+	tempNum = saveAnswer;
+//	tempNum.toString();
+	console.log(tempNum);
+}
+
+function clearAnswer() {
+	document.querySelector('.answerDisplay').textContent = answer;
+}
 
 
 // ISSUES
-// 1) save answer functionality
-// 2) positive/negative
+// 1) positive/negative
+// 2) 
 // 3) 
 
 // GOALS
-// 1) Create separate functions for the operators
-// 2) create an Array that can take numbers and operators
-// 3) keyboard is tied to the calculator
-// 3) after the equals sign  the answer is the first number of new equation
-// 4) snarky comment for trying to divide over zero
+// 1) keyboard is tied to the calculator
+// 2) snarky comment for trying to divide over zero
+// 3) 
+// 3) 
+// 4) 
 
 
 
