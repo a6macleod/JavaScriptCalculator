@@ -4,11 +4,12 @@ let tempNum = "";
 let newOperator;
 let calculation = [];
 
-// CLICK NUMBERS
+// MOUSE CLICK NUMBERS
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(function(currentBut) {
 	currentBut.addEventListener('click', function () {
-		console.log(calculation);	
+		console.log(calculation);
+		clearAnswer();	
 		let text = currentBut.value;
 		if (operatorCheck(tempNum) == true) {
 			operatorPush(); // This will push the last operator to the array if available
@@ -20,7 +21,7 @@ numButtons.forEach(function(currentBut) {
 			updateDisplay();
 		});
 });
-// CLICK OPERATORS
+// MOUSE CLICK OPERATORS
 const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
@@ -33,7 +34,7 @@ operButtons.forEach(function(currentOper) {
 			tempNum += text;
 			updateDisplay();
 		} else {
-			changeOperator(); // CHANGE OPERATOR IF 
+			changeOperator(); // CHANGE OPERATOR IF AVAILABLE
 			
 		}
 	});
@@ -143,6 +144,49 @@ function clearAnswer() {
 	document.querySelector('.answerDisplay').textContent = answer;
 }
 
+// KEYBOARD NUMBER TYPE
+document.addEventListener('keydown', function (event) {
+	const keyName = event.key;
+	if((Number(keyName) >= 0 || Number(keyName) <=9)) {
+		clearAnswer();
+		if (operatorCheck(tempNum) == true) {
+				operatorPush(); // This will push the last operator to the array if available
+			} else
+				tempNum += keyName.toString();
+				updateDisplay();
+		} else 
+		if (keyName == '/' || keyName == '*' || keyName == '-' || keyName == '+'){
+			clearAnswer();
+			if (operatorCheck(tempNum) == false) {
+				numberPush(); // This will push the previous numbers to the array
+				tempNum += keyName;
+				updateDisplay();
+			} else {
+				changeOperator(); // CHANGE OPERATOR IF AVAILABLE
+			}
+		} else 
+		if (keyName == 'Backspace') {
+			let update = tempNum;
+			tempNum = update.slice(0, -1);
+			updateDisplay();
+		} else
+		if (keyName == "Enter") {
+			operate();
+		} else
+		if (keyName === '.') {
+			clearAnswer();
+			decimalCheck();
+		} else
+		if (keyName === 'Delete') {
+			calculation = [];
+			tempNum = "";
+			answer = "";
+			updateAnswer();
+			updateDisplay();
+		}
+	});
+
+
 
 // ISSUES
 // 1) 
@@ -150,8 +194,8 @@ function clearAnswer() {
 // 3) 
 
 // GOALS
-// 1) keyboard is tied to the calculator
-// 2) snarky comment for trying to divide over zero
+// 1) round answers to 8 digits
+// 2) snarky comment for trying to divide over zero?
 // 3) 
 // 3) 
 // 4) 
