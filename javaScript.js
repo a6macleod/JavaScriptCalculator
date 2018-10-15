@@ -61,15 +61,20 @@ equal.addEventListener('click', function() {
 	operate();
 });
 // "+/-" CHANGE POSITIVE/NEGATIVE BUTTON
-//let equal = document.querySelector('#positivity');
-//equal.addEventListener('click', function() {
-//	let negCheck = tempNum.slice(0);
-//	if (negCheck == "-") {
-//		return;
-//	} else 
-//	updateDisplay();
-//});
-
+let positivity = document.querySelector('#positivity');
+positivity.addEventListener('click', function() {
+	let negCheck = tempNum.slice(0, 1);
+	if (negCheck == "-") {
+		tempNum = tempNum.substring(1);
+		console.log("NegCheck Positive")
+		updateDisplay();
+		return;
+	} else {
+	let negAdd = "-" + tempNum;
+	tempNum = negAdd;
+	updateDisplay();
+	}
+});
 function operatorCheck () {
 	let tNum = tempNum.slice(-1);
 		if (tNum == '/' || tNum == '*' || tNum == '-' || tNum == '+'){
@@ -78,13 +83,11 @@ function operatorCheck () {
 			return false;
 		}
 }
-
 function numberPush () {
 	calculation.push(Number(tempNum));
 	tempNum = '';
 	console.log(calculation);
 }
-
 function operatorPush () {
 	let sign = tempNum;
 		calculation.push(sign);
@@ -100,13 +103,6 @@ function updateAnswer () {
 	answer = '';
 	calculation = [];
 }
-function changeOperator () {
-	let update = tempNum;
-	update = update.slice(0, -1);
-	update += newOperator;
-	tempNum = update;
-	updateDisplay();
-}
  //"." decimal point check
 function decimalCheck () {
 	if (tempNum.length === 0) {
@@ -118,7 +114,6 @@ function decimalCheck () {
 		console.log("decimal")
 	}
 };
-
 // Operate at "="
 function operate () {
 	if (operatorCheck(tempNum) == false) {
@@ -128,23 +123,29 @@ function operate () {
 		console.log(string);
 		answer = eval(string);
 		updateAnswer();
+	} else {
+		alert("too early! Enter a number!")
+		return;
 	}
 }
-
+function changeOperator () {
+	let update = tempNum;
+	update = update.slice(0, -1);
+	update += newOperator;
+	tempNum = update;
+	updateDisplay();
+}
 function saveAnswer() {
 	let saveAnswer = answer.toString();
 	tempNum = saveAnswer;
-//	tempNum.toString();
-	console.log(tempNum);
 }
-
 function clearAnswer() {
 	document.querySelector('.answerDisplay').textContent = answer;
 }
 
 
 // ISSUES
-// 1) positive/negative
+// 1) 
 // 2) 
 // 3) 
 

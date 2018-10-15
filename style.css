@@ -77,7 +77,7 @@ a{
 	font-weight: bold;
 	background-color: #e6e6e6;
 }
-.operatorButton, .equalsButton, .delete {
+.operatorButton, .equalsButton, .delete, .positivity {
 	background-color: #ff5c33;
 	color: white;
 }
