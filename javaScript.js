@@ -52,6 +52,7 @@ clear.addEventListener('click', function() {
 // "del" DELETE BUTTON
 let del = document.querySelector('#delete');
 del.addEventListener('click', function() {
+	clearAnswer();
 	let update = tempNum;
 	tempNum = update.slice(0, -1);
 	updateDisplay();
@@ -123,6 +124,10 @@ function operate () {
 		let string = calc.replace(/,/g, '');
 		console.log(string);
 		answer = eval(string);
+		if(answer.toString().length > 7) {
+			answer = answer.toFixed(7);
+			updateAnswer();
+		} else		
 		updateAnswer();
 	} else {
 		alert("too early! Enter a number!")
@@ -166,6 +171,7 @@ document.addEventListener('keydown', function (event) {
 			}
 		} else 
 		if (keyName == 'Backspace') {
+			clearAnswer();
 			let update = tempNum;
 			tempNum = update.slice(0, -1);
 			updateDisplay();
@@ -174,6 +180,9 @@ document.addEventListener('keydown', function (event) {
 			operate();
 		} else
 		if (keyName === '.') {
+			if (operatorCheck(tempNum) == true) {
+				operatorPush(); // This will push the last operator to the array if available
+			}
 			clearAnswer();
 			decimalCheck();
 		} else
@@ -185,27 +194,6 @@ document.addEventListener('keydown', function (event) {
 			updateDisplay();
 		}
 	});
-
-
-
-// ISSUES
-// 1) 
-// 2) 
-// 3) 
-
-// GOALS
-// 1) round answers to 8 digits
-// 2) snarky comment for trying to divide over zero?
-// 3) 
-// 3) 
-// 4) 
-
-
-
-
-
-
-
 
 
 
