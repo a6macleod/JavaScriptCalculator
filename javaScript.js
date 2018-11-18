@@ -8,7 +8,6 @@ let calculation = [];
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(function(currentBut) {
 	currentBut.addEventListener('click', function () {
-		console.log(calculation);
 		clearAnswer();	
 		let text = currentBut.value;
 		if (operatorCheck(tempNum) == true) {
@@ -25,7 +24,6 @@ numButtons.forEach(function(currentBut) {
 const operButtons = document.querySelectorAll('.operatorButton');
 operButtons.forEach(function(currentOper) {
 	currentOper.addEventListener('click', function () {
-		console.log(calculation);
 		clearAnswer();
 		newOperator = currentOper.value;
 		let text = currentOper.value;
@@ -43,12 +41,10 @@ operButtons.forEach(function(currentOper) {
 // "AC" clear button 
 let clear = document.querySelector("#clear");
 clear.addEventListener('click', function() {
-	calculation = [];
 	tempNum = "";
-	answer = "";
 	updateAnswer();
-	updateDisplay();
 });
+
 // "del" DELETE BUTTON
 let del = document.querySelector('#delete');
 del.addEventListener('click', function() {
@@ -57,18 +53,19 @@ del.addEventListener('click', function() {
 	tempNum = update.slice(0, -1);
 	updateDisplay();
 });
+
 // "=" EQUALS BUTTON
 let equal = document.querySelector('#equals');
 equal.addEventListener('click', function() {
 	operate();
 });
+
 // "+/-" CHANGE POSITIVE/NEGATIVE BUTTON
 let positivity = document.querySelector('#positivity');
 positivity.addEventListener('click', function() {
 	let negCheck = tempNum.slice(0, 1);
 	if (negCheck == "-") {
 		tempNum = tempNum.substring(1);
-		console.log("NegCheck Positive")
 		updateDisplay();
 		return;
 	} else {
@@ -77,6 +74,7 @@ positivity.addEventListener('click', function() {
 	updateDisplay();
 	}
 });
+
 function operatorCheck () {
 	let tNum = tempNum.slice(-1);
 		if (tNum == '/' || tNum == '*' || tNum == '-' || tNum == '+'){
@@ -88,7 +86,6 @@ function operatorCheck () {
 function numberPush () {
 	calculation.push(Number(tempNum));
 	tempNum = '';
-	console.log(calculation);
 }
 function operatorPush () {
 	let sign = tempNum;
@@ -113,7 +110,6 @@ function decimalCheck () {
 	} else if (tempNum.indexOf('.') < 0){
 		tempNum += '.';
 		updateDisplay()
-		console.log("decimal")
 	}
 };
 // Operate at "="
@@ -122,16 +118,12 @@ function operate () {
 		numberPush();
 		let calc = calculation.join();
 		let string = calc.replace(/,/g, '');
-		console.log(string);
 		answer = eval(string);
 		if(answer.toString().length > 7) {
-			answer = answer.toFixed(7);
+			answer = answer.toFixed(2);
 			updateAnswer();
 		} else		
 		updateAnswer();
-	} else {
-		alert("too early! Enter a number!")
-		return;
 	}
 }
 function changeOperator () {
@@ -149,7 +141,7 @@ function clearAnswer() {
 	document.querySelector('.answerDisplay').textContent = answer;
 }
 
-// KEYBOARD NUMBER TYPE
+// KEYBOARD NUMBER TYPING
 document.addEventListener('keydown', function (event) {
 	const keyName = event.key;
 	if((Number(keyName) >= 0 || Number(keyName) <=9)) {
